@@ -92,10 +92,37 @@ let resultsBtn = document.getElementById('show-reults-btn');
 let resultsList = document.getElementById('results-list');
 
 // ********** Constructor Function **************
+function Product(name, photoExtension = 'jpg'){
+  this.name = name;
+  this.photo = `img/${name}.${photoExtension}`;
+  this.votes = 0;
+  this.views = 0;
 
+  allProducts.push(this);
+}
 
 
 // ************ Object Creation ****************
+new Product('bag');
+new Product('banana');
+new Product('bathroom');
+new Product('boots');
+new Product('breakfast');
+new Product('bubblegum');
+new Product('chair');
+new Product('cthulhu');
+new Product('dog-duck');
+new Product('dragon');
+new Product('pen');
+new Product('pet-sweep');
+new Product('scissors');
+new Product('shark');
+new Product('sweep', 'png');
+new Product('tauntaun');
+new Product('unicorn');
+new Product('water-can');
+new Product('wine-glass');
+new Product('wireframe');
 
 
 
@@ -104,7 +131,13 @@ let resultsList = document.getElementById('results-list');
 
 
 // *************** Helper Functions **************
+function renderImgs(){
+  imgOne.src = allProducts[0].photo;
+  imgTwo.src = allProducts[1].photo;
+  imgThree.src = allProducts[2].photo;
+}
 
+renderImgs();
 
 
 // *************** Event Handlers ***************
