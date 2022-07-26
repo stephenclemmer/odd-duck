@@ -1,5 +1,126 @@
 'use strict';
 
+// ************* Global Variables **************
+let totalVotes = 25;
+let allProducts = [];
+
+
+// ************** DOM References *************
+let imgContainer = document.getElementById('img-container');
+let imgOne = document.getElementById('img-one');
+let imgTwo = document.getElementById('img-two');
+let imgThree = document.getElementById('img-three');
+
+let resultsBtn = document.getElementById('show-results-btn');
+let resultsList = document.getElementById('results-list');
+
+// ********** Constructor Function **************
+function Product(name, photoExtension = 'jpg'){
+  this.name = name;
+  this.photo = `img/${name}.${photoExtension}`;
+  this.votes = 0;
+  this.views = 0;
+
+  allProducts.push(this);
+}
+
+
+// ************ Object Creation ****************
+new Product('bag');
+new Product('banana');
+new Product('bathroom');
+new Product('boots');
+new Product('breakfast');
+new Product('bubblegum');
+new Product('chair');
+new Product('cthulhu');
+new Product('dog-duck');
+new Product('dragon');
+new Product('pen');
+new Product('pet-sweep');
+new Product('scissors');
+new Product('shark');
+new Product('sweep', 'png');
+new Product('tauntaun');
+new Product('unicorn');
+new Product('water-can');
+new Product('wine-glass');
+new Product('wireframe');
+
+
+
+// *************** Executable Code **********
+// *************** Helper Functions **************
+
+function randomIndexGenerator(){
+  return Math.floor(Math.random() * allProducts.length);
+}
+
+
+function renderImgs(){
+  let imgOneIndex = randomIndexGenerator();
+  let imgTwoIndex = randomIndexGenerator();
+  let imgThreeIndex = randomIndexGenerator();
+
+  while (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex){
+    imgTwoIndex = randomIndexGenerator();
+    imgThreeIndex = randomIndexGenerator();
+  }
+
+  imgOne.src = allProducts[imgOneIndex].photo;
+  imgOne.alt = allProducts[imgOneIndex].name;
+  allProducts[imgOneIndex].views++;
+  imgTwo.src = allProducts[imgTwoIndex].photo;
+  imgTwo.alt = allProducts[imgTwoIndex].name;
+  allProducts[imgThreeIndex].views++;
+  imgThree.src = allProducts[imgThreeIndex].photo;
+  imgThree.alt = allProducts[imgThreeIndex].name;
+  allProducts[imgThreeIndex].views++;
+}
+
+renderImgs();
+
+// ************** Event Listeners *************
+imgContainer.addEventListener('click', handleClick);
+
+resultsBtn.addEventListener('click', handleShowResults);
+
+// *************** Event Handlers ***************
+function handleClick(event){
+  event.preventDefault();
+
+  let imgClicked = event.target.name;
+
+  for(let i= 0; i < allProducts.length; i++){
+    if (imgClicked === allProducts[i].name){
+      allProducts[i].votes++;
+    }
+  }
+  totalVotes--;
+  renderImgs();
+
+  if (totalVotes === 0){
+    imgContainer.removeEventListener('click', handleClick);
+  }
+  console.log(imgClicked);
+}
+
+
+function handleShowResults(){
+  if (totalVotes === 0){
+    for(let i = 0; i < allProducts.length; i++){
+      let liElem = document.createElement('li');
+      liElem.textContent = `${allProducts[i].name} had ${allProducts[i].votes} votes, and was seen ${allProducts[i].views} times.`;
+      resultsList.appendChild(liElem);
+    }
+  }
+}
+
+
+
+
+
+
 // // Approaching defining the problem domain: Break things down:
 
 // - Array of pics of products
@@ -76,72 +197,3 @@
 // // k. calculate the percentage of times an item was clicked when it was shown
 
 // # # #   
-
-// ************* Global Variables **************
-let totalVotes = 25;
-let allProducts = [];
-
-
-// ************** DOM References *************
-let imgContainer = document.getElementById('img-container');
-let imgOne = document.getElementById('img-one');
-let imgTwo = document.getElementById('img-two');
-let imgThree = document.getElementById('img-three');
-
-let resultsBtn = document.getElementById('show-reults-btn');
-let resultsList = document.getElementById('results-list');
-
-// ********** Constructor Function **************
-function Product(name, photoExtension = 'jpg'){
-  this.name = name;
-  this.photo = `img/${name}.${photoExtension}`;
-  this.votes = 0;
-  this.views = 0;
-
-  allProducts.push(this);
-}
-
-
-// ************ Object Creation ****************
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep', 'png');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('water-can');
-new Product('wine-glass');
-new Product('wireframe');
-
-
-
-// *************** Executable Code **********
-
-
-
-// *************** Helper Functions **************
-function renderImgs(){
-  imgOne.src = allProducts[0].photo;
-  imgTwo.src = allProducts[1].photo;
-  imgThree.src = allProducts[2].photo;
-}
-
-renderImgs();
-
-
-// *************** Event Handlers ***************
-
-
-// ************** Event Listeners *************
-
