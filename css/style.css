@@ -1,0 +1,20 @@
+
+
+#img-one, #img-two, #img-three {
+  height: 100px;
+  width: 100px;
+  border: solid;
+}
+
+#show-results-btn {
+  height: 100px;
+  width: 100px;
+  border: solid;
+}
+
+#results-list {
+  height: 100px;
+  width: 100px;
+  border: solid;
+}
+
