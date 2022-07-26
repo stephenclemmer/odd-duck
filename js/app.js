@@ -3,6 +3,7 @@
 // ************* Global Variables **************
 let totalVotes = 25;
 let allProducts = [];
+let productIndexArr = [];
 
 
 // ************** DOM References *************
@@ -56,27 +57,23 @@ function randomIndexGenerator(){
   return Math.floor(Math.random() * allProducts.length);
 }
 
-// let productIndexArr = [];
 
 function renderImgs(){
-  let imgOneIndex = randomIndexGenerator();
-  let imgTwoIndex = randomIndexGenerator();
-  let imgThreeIndex = randomIndexGenerator();
-
-  while (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex){
-    imgTwoIndex = randomIndexGenerator();
-    imgThreeIndex = randomIndexGenerator();
+  while (productIndexArr.length < 6){
+    let randomNum = randomIndexGenerator();
+    if(!productIndexArr.includes(randomNum)){
+      productIndexArr.push(randomNum);
+    }
   }
 
-  // while(productIndexArr.length < 6){
-  //   let randomNum = randomIndexGenerator;
-  //   if(!productIndexArr.includes(randomMNum)){
-  //     productIndexArr.push(randomNum);
-  //   }
-  // }
+  console.log(productIndexArr);
 
-// pop off the first three numbers from the beginning of the array
-
+  let imgOneIndex = productIndexArr.shift();
+  let imgTwoIndex = productIndexArr.shift();
+  let imgThreeIndex = productIndexArr.shift();
+  
+  console.log(productIndexArr);
+  
   imgOne.src = allProducts[imgOneIndex].photo;
   imgOne.alt = allProducts[imgOneIndex].name;
   allProducts[imgOneIndex].views++;
@@ -89,6 +86,10 @@ function renderImgs(){
 }
 
 renderImgs();
+
+// pop off the first three numbers from the beginning of the array
+
+
 
 // ************** Event Listeners *************
 imgContainer.addEventListener('click', handleClick);
