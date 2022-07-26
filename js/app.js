@@ -88,9 +88,9 @@ resultsBtn.addEventListener('click', handleShowResults);
 // *************** Event Handlers ***************
 function handleClick(event){
   event.preventDefault();
-
+  
   let imgClicked = event.target.name;
-
+  
   for(let i= 0; i < allProducts.length; i++){
     if (imgClicked === allProducts[i].name){
       allProducts[i].votes++;
@@ -98,7 +98,7 @@ function handleClick(event){
   }
   totalVotes--;
   renderImgs();
-
+  
   if (totalVotes === 0){
     imgContainer.removeEventListener('click', handleClick);
   }
@@ -113,6 +113,7 @@ function handleShowResults(){
       liElem.textContent = `${allProducts[i].name} had ${allProducts[i].votes} votes, and was seen ${allProducts[i].views} times.`;
       resultsList.appendChild(liElem);
     }
+    resultsBtn.removeEventListener('click', handleShowResults);
   }
 }
 
