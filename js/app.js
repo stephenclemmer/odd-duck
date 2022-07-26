@@ -56,6 +56,7 @@ function randomIndexGenerator(){
   return Math.floor(Math.random() * allProducts.length);
 }
 
+// let productIndexArr = [];
 
 function renderImgs(){
   let imgOneIndex = randomIndexGenerator();
@@ -66,6 +67,15 @@ function renderImgs(){
     imgTwoIndex = randomIndexGenerator();
     imgThreeIndex = randomIndexGenerator();
   }
+
+  // while(productIndexArr.length < 6){
+  //   let randomNum = randomIndexGenerator;
+  //   if(!productIndexArr.includes(randomMNum)){
+  //     productIndexArr.push(randomNum);
+  //   }
+  // }
+
+// pop off the first three numbers from the beginning of the array
 
   imgOne.src = allProducts[imgOneIndex].photo;
   imgOne.alt = allProducts[imgOneIndex].name;
