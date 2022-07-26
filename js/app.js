@@ -66,13 +66,13 @@ function renderImgs(){
     }
   }
 
-  console.log(productIndexArr);
+  // console.log(productIndexArr);
 
   let imgOneIndex = productIndexArr.shift();
   let imgTwoIndex = productIndexArr.shift();
   let imgThreeIndex = productIndexArr.shift();
   
-  console.log(productIndexArr);
+  // console.log(productIndexArr);
   
   imgOne.src = allProducts[imgOneIndex].photo;
   imgOne.alt = allProducts[imgOneIndex].name;
@@ -86,9 +86,6 @@ function renderImgs(){
 }
 
 renderImgs();
-
-// pop off the first three numbers from the beginning of the array
-
 
 
 // ************** Event Listeners *************
