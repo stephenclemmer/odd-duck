@@ -1,5 +1,7 @@
 
 
+
+
 #img-one, #img-two, #img-three {
   height: 100px;
   width: 100px;
@@ -17,4 +19,62 @@
   width: 100px;
   border: solid;
 }
+
+body {
+  margin: 0;
+  font: 100% / 1.5 Inconsolata, monospace;
+  color: hsl(228, 82%, 36%);
+  background-color: hsl(131, 76%, 42%);
+}
+
+h1 { color: #111; 
+  font-family: 'Helvetica Neue', sans-serif; 
+  font-size: 100px; 
+  font-weight: bold; letter-spacing: -1px; line-height: 1; 
+  text-align: center; 
+}
+
+div {
+  text-align: center;
+  font-size:medium;
+
+}
+
+#img-one, #img-two, #img-three {
+  height: 300px;
+  width: 25%;
+  border: solid;
+};
+
+
+#show-results-btn {
+  text-align: center;
+  height: 100px;
+  width: 100px;
+  border: solid;
+};
+
+#results-list {
+  height: 100px;
+  width: 100px;
+  border: solid;
+}
+
+main section {
+  display: flex;
+  flex-direction: row;
+  margin: 50px;
+  justify-content: center;
+  };
+
+  main {
+  
+    text: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-content: center; 
+    border: solid;
+  }
+
 
