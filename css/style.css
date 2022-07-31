@@ -51,7 +51,7 @@ div {
   text-align: center;
   height: 100px;
   width: 100px;
-  border: solid;
+  border: darkblue;
 };
 
 #results-list {
