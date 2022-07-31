@@ -13,7 +13,12 @@ let imgTwo = document.getElementById('img-two');
 let imgThree = document.getElementById('img-three');
 
 let resultsBtn = document.getElementById('show-results-btn');
-// let resultsList = document.getElementById('results-list');
+
+// **************** Local Storage 2 of 3 ***************
+let retrievedData = localStorage.getItem('productData');
+let parsedData = JSON.parse(retrievedData);
+
+console.log(parsedData);
 
 // ********** Constructor Function **************
 function Product(name, photoExtension = 'jpg'){
@@ -27,27 +32,32 @@ function Product(name, photoExtension = 'jpg'){
 
 
 // ************ Object Creation ****************
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep', 'png');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('water-can');
-new Product('wine-glass');
-new Product('wireframe');
+// ********** Local Storage 3 of 3 ************
+if(retrievedData){
+  allProducts = parsedData;
+} else {
 
+  new Product('bag');
+  new Product('banana');
+  new Product('bathroom');
+  new Product('boots');
+  new Product('breakfast');
+  new Product('bubblegum');
+  new Product('chair');
+  new Product('cthulhu');
+  new Product('dog-duck');
+  new Product('dragon');
+  new Product('pen');
+  new Product('pet-sweep');
+  new Product('scissors');
+  new Product('shark');
+  new Product('sweep', 'png');
+  new Product('tauntaun');
+  new Product('unicorn');
+  new Product('water-can');
+  new Product('wine-glass');
+  new Product('wireframe');
+}
 
 
 // *************** Executable Code **********
@@ -66,26 +76,21 @@ function renderImgs(){
     }
   }
 
-  // console.log(productIndexArr);
-
   let imgOneIndex = productIndexArr.shift();
   let imgTwoIndex = productIndexArr.shift();
   let imgThreeIndex = productIndexArr.shift();
-  
-  // console.log(productIndexArr);
-  
+
   imgOne.src = allProducts[imgOneIndex].photo;
   imgOne.alt = allProducts[imgOneIndex].name;
   allProducts[imgOneIndex].views++;
-  
+
   imgTwo.src = allProducts[imgTwoIndex].photo;
   imgTwo.alt = allProducts[imgTwoIndex].name;
   allProducts[imgTwoIndex].views++;
-  
+
   imgThree.src = allProducts[imgThreeIndex].photo;
   imgThree.alt = allProducts[imgThreeIndex].name;
   allProducts[imgThreeIndex].views++;
-  
 }
 
 renderImgs();
@@ -98,37 +103,35 @@ resultsBtn.addEventListener('click', handleShowResults);
 // *************** Event Handlers ***************
 function handleClick(event){
   event.preventDefault();
-  
+
   let imgClicked = event.target.alt;
-  
-  // console.dir(event.target);
 
   for(let i = 0; i < allProducts.length; i++){
     if (imgClicked === allProducts[i].name){
       allProducts[i].votes++;
     }
-
-    // console.log(allProducts);
-
   }
+
   totalVotes--;
   renderImgs();
-  
+
   if (totalVotes === 0){
+    // ******* Local Storage 1 of 3 *********
+    let stringifiedData = JSON.stringify(allProducts);
+    localStorage.setItem('productData', stringifiedData);
+    
+    // console.log(storedData);
+
     imgContainer.removeEventListener('click', handleClick);
   }
-  // console.log(imgClicked);
 }
 
 
 function handleShowResults(){
   if (totalVotes === 0){
+
     renderChart();
-    // for(let i = 0; i < allProducts.length; i++){
-    //   let liElem = document.createElement('li');
-    //   liElem.textContent = `${allProducts[i].name} had ${allProducts[i].votes} votes, and was seen ${allProducts[i].views} times.`;
-    //   resultsList.appendChild(liElem);
-    // }
+
     resultsBtn.removeEventListener('click', handleShowResults);
   }
 }
@@ -149,7 +152,7 @@ function renderChart(){
     productViews.push(allProducts[i].views);
     productVotes.push(allProducts[i].votes);
   }
-  
+
   let myObj = {
     type: 'bar',
     data: {
