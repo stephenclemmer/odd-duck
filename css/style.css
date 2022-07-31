@@ -49,9 +49,9 @@ div {
 
 #show-results-btn {
   text-align: center;
-  height: 100px;
+  height: 25px;
   width: 100px;
-  border: darkblue;
+  border: purple;
 };
 
 #results-list {
@@ -77,4 +77,7 @@ main section {
     border: solid;
   }
 
-
+#show-results-btn{
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
