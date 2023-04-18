@@ -68,7 +68,16 @@ function randomIndexGenerator(){
 }
 
 
+/**
+ * The function renders three random images from an array of products and increments their view count.
+ */
 function renderImgs(){
+ /* This code block is generating an array of 6 unique random numbers between 0 and the length of the
+ `allProducts` array. It does this by using a `while` loop to repeatedly generate a random number
+ using the `randomIndexGenerator()` function until the `productIndexArr` array has a length of 6. If
+ the random number generated is not already in the `productIndexArr` array, it is added to the array
+ using the `push()` method. This ensures that the same product is not displayed more than once in
+ the same set of three images. */
   while (productIndexArr.length < 6){
     let randomNum = randomIndexGenerator();
     if(!productIndexArr.includes(randomNum)){
@@ -76,10 +85,22 @@ function renderImgs(){
     }
   }
 
+ /* These lines of code are removing the first three elements from the `productIndexArr` array and
+ assigning them to the variables `imgOneIndex`, `imgTwoIndex`, and `imgThreeIndex`. These variables
+ are then used to access the corresponding products in the `allProducts` array and display their
+ images on the webpage. This ensures that each set of three images displayed is unique and does not
+ contain any duplicates. */
   let imgOneIndex = productIndexArr.shift();
   let imgTwoIndex = productIndexArr.shift();
   let imgThreeIndex = productIndexArr.shift();
 
+ /* These lines of code are setting the `src` attribute of the `imgOne` element to the `photo` property
+ of the product object at the index specified by `imgOneIndex` in the `allProducts` array. They are
+ also setting the `alt` attribute of the `imgOne` element to the `name` property of the same product
+ object. Finally, they are incrementing the `views` property of the same product object by 1. This
+ process is repeated for `imgTwo` and `imgThree` as well, with their corresponding indices. This
+ code is responsible for displaying the images on the webpage and keeping track of the number of
+ times each image has been viewed. */
   imgOne.src = allProducts[imgOneIndex].photo;
   imgOne.alt = allProducts[imgOneIndex].name;
   allProducts[imgOneIndex].views++;
