@@ -15,7 +15,17 @@ let imgThree = document.getElementById('img-three');
 let resultsBtn = document.getElementById('show-results-btn');
 
 // **************** Local Storage 2 of 3 ***************
+/* This line of code is retrieving data from local storage using the `getItem()` method and storing it
+in the `retrievedData` variable. The data being retrieved is associated with the key
+`'productData'`, which is a string that was previously stored in local storage using the `setItem()`
+method. */
 let retrievedData = localStorage.getItem('productData');
+
+/* `let parsedData = JSON.parse(retrievedData);` is parsing the JSON data stored in the `retrievedData`
+variable and converting it back into a JavaScript object. This is necessary because data stored in
+local storage is always stored as a string, even if it was originally an object. The `JSON.parse()`
+method is used to convert the string back into an object so that it can be used in the code as an
+object. */
 let parsedData = JSON.parse(retrievedData);
 
 console.log(parsedData);
@@ -117,14 +127,26 @@ function renderImgs(){
 renderImgs();
 
 // ************** Event Listeners *************
+/* `imgContainer.addEventListener('click', handleClick)` is adding an event listener to the
+`imgContainer` element that listens for a click event. When a click event is detected on the
+`imgContainer` element, the `handleClick` function is called. */
 imgContainer.addEventListener('click', handleClick);
 
 resultsBtn.addEventListener('click', handleShowResults);
 
 // *************** Event Handlers ***************
+/**
+ * This function handles the click event on an image, updates the vote count for the corresponding
+ * product, and stores the product data in local storage when all votes have been cast.
+ * @param event - The event parameter represents the event that triggered the function. In this case,
+ * it is a click event on an image element.
+ */
 function handleClick(event){
   event.preventDefault();
 
+  /* `let imgClicked = event.target.alt;` is assigning the value of the `alt` attribute of the image
+  element that was clicked to the `imgClicked` variable. This is used in the `handleClick` function
+  to determine which product was clicked and update its vote count. */
   let imgClicked = event.target.alt;
 
   for(let i = 0; i < allProducts.length; i++){
